@@ -1,4 +1,4 @@
-function Cell({details,updateFlag,revealCell}){
+function Cell({details,updateFlag,revealCell,gamestate}){
     const style={
         cellStyle:{
             width:40,height:40,backgroundColor:'lightgrey',border:'1px solid white',
@@ -20,7 +20,7 @@ function Cell({details,updateFlag,revealCell}){
     
     return (
         <div style={details.revealed?style.clickedCell:style.cellStyle} 
-        onClick={()=>revealCell(details.x,details.y)} onContextMenu={(e)=>updateFlag(e,details.x,details.y)}>
+        onClick={(gamestate===0)? ()=>revealCell(details.x,details.y) : undefined} onContextMenu={(e)=>updateFlag(e,details.x,details.y)}>
             {(!details.revealed && details.flagged)? 
             "🚩":
             (details.revealed && details.value === -1) ?
